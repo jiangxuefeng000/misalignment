@@ -6,9 +6,6 @@ from typing import Tuple
 
 
 def risk_representation_consistency(embeddings, group_ids):
-    """
-    Measure intra-group variance of semantic-equivalent samples.
-    """
     scores = []
 
     for gid in np.unique(group_ids):
@@ -20,12 +17,9 @@ def risk_representation_consistency(embeddings, group_ids):
     return np.mean(scores)
 
 def evaluate_risk_consistency(embeddings, risk_scores, group_ids):
-    
-    # 计算各项指标
+
     rep_consistency = risk_representation_consistency(embeddings, group_ids)
     score_stability = risk_score_stability(risk_scores, group_ids)
-    
-    # 计算组间一致性（可选）
     inter_group_variance = calculate_inter_group_variance(embeddings, group_ids)
     
     results = {
@@ -104,4 +98,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
